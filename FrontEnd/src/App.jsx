@@ -1,16 +1,20 @@
 import React from 'react';
-import Header from './components/Header/Header';
-import Body from './components/Body/Body';
-import Footer from './components/Footer/Footer';
-import './styles.scss'; 
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from './Pages/Home';
+import ViewItem from './Pages/ViewItem';
+import AddItem from './Pages/AddItem';
+import About from './Pages/About';
 
 const App = () => {
   return (
-    <div className="parent">
-      <Header />
-      <Body />
-      <Footer />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/annonser" element={<ViewItem />} />
+        <Route path="/mina-annonser/lagg-in-annons" element={<AddItem />} />
+        <Route path="/About" element={<About />} />
+      </Routes>
+    </Router>
   );
 };
 
