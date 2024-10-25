@@ -5,9 +5,13 @@ name: .NET
 
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - master
+      - BackEndOm
   pull_request:
-    branches: [ "master" ]
+    branches:
+      - master
+      - BackEndOm
 
 jobs:
   build:
