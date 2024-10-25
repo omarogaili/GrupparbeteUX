@@ -23,13 +23,10 @@ jobs:
         dotnet-version: 8.0.x
 
     - name: Restore dependencies
-      run: dotnet restore CoreServicesApi/CoreServicesApi.sln
-      working-directory: CoreServicesApi
+      run: dotnet restore ./CoreServicesApi/CoreServicesApi.sln
 
     - name: Build
-      run: dotnet build CoreServicesApi/CoreServicesApi.sln --no-restore
-      working-directory: CoreServicesApi
+      run: dotnet build ./CoreServicesApi/CoreServicesApi.sln --no-restore
 
     - name: Test
-      run: dotnet test CoreServicesApi/CoreServicesApi.sln --no-build --verbosity normal
-      working-directory: CoreServicesApi
+      run: dotnet test ./CoreServicesApi/CoreServicesApi.sln --no-build --verbosity normal
