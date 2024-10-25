@@ -9,9 +9,11 @@ namespace Models
         public int Id { get; set; }
         public decimal TotalAmount { get; private set; }
         public DateTime CreatedAt { get; set; }
-        public int Cargo { get; set;}
-        [ForeignKey("Id")]
+        public int Cargo { get; set; }
+        [ForeignKey("UserId")]
         public int UserId { get; set; }
         public User? User { get; set; }
+        public List<Item> Items { get; set; } = new List<Item>();
     }
+
 }

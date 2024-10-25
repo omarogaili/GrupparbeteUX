@@ -11,5 +11,9 @@ namespace Models
         public string? Password { get; set; }
         public string? Address { get; set; }
         public DateTime? CreatedAt { get; set; }
+        public int BillId { get; set; }
+        public List<Bill>? Bills { get; set; }
+        public int itemId { get; set; }
+        public List<Item>? Items { get; set; }
     }
 }

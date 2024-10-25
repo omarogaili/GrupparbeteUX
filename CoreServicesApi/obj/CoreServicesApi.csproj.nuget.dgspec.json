@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/omar/Desktop/Desktop-omar/UX/grupparbete/CoreServicesApi/CoreServicesApi.csproj": {}
+    "/home/omar/Desktop/Desktop-omar/UX/Grupparbete/CoreServicesApi/CoreServicesApi.csproj": {}
   },
   "projects": {
-    "/home/omar/Desktop/Desktop-omar/UX/grupparbete/CoreServicesApi/CoreServicesApi.csproj": {
+    "/home/omar/Desktop/Desktop-omar/UX/Grupparbete/CoreServicesApi/CoreServicesApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/omar/Desktop/Desktop-omar/UX/grupparbete/CoreServicesApi/CoreServicesApi.csproj",
+        "projectUniqueName": "/home/omar/Desktop/Desktop-omar/UX/Grupparbete/CoreServicesApi/CoreServicesApi.csproj",
         "projectName": "CoreServicesApi",
-        "projectPath": "/home/omar/Desktop/Desktop-omar/UX/grupparbete/CoreServicesApi/CoreServicesApi.csproj",
+        "projectPath": "/home/omar/Desktop/Desktop-omar/UX/Grupparbete/CoreServicesApi/CoreServicesApi.csproj",
         "packagesPath": "/home/omar/.nuget/packages/",
-        "outputPath": "/home/omar/Desktop/Desktop-omar/UX/grupparbete/CoreServicesApi/obj/",
+        "outputPath": "/home/omar/Desktop/Desktop-omar/UX/Grupparbete/CoreServicesApi/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/omar/.nuget/NuGet/NuGet.Config"
