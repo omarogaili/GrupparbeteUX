@@ -1,0 +1,16 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+	Layout = null;
+}
+<div class="product-list">
+    @foreach (var item in items)
+    {
+        <div class="product-item">
+            <h2>@item.Name</h2>
+            <p>@item.Description</p>
+            <p>Pris: @item.Price.ToString("C")</p>
+            <img src="@item.ImageUrl" alt="@item.Name" />
+        </div>
+    }
+</div>
