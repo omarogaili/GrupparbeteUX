@@ -1,0 +1,44 @@
+.Header {
+    display: grid;
+    grid-template-columns: repeat(12, 0.8fr); /* Minska kolumnbredden */
+    grid-template-rows: 1fr; /* 1 rad */
+    grid-column-gap: 0px; /* Minska gap */
+    grid-row-gap: 0px; /* Minska gap */
+
+    background-color: lightgray; /* Bakgrundsfärg */
+    padding: 0.5rem; /* Justera padding */
+}
+
+.LogaNamn, .Kategorier, .LagInAnnons, .Search, .LogSignIn {
+    padding: 0.1rem; 
+    display: flex; /* Gör varje element en flex-container */
+    align-items: center; /* Centrera vertikalt */
+    justify-content: center; /* Centrera horisontellt */
+    text-align: center; /* Centrera texten i cellen */
+}
+
+/* Om du vill ha olika bakgrundsfärger, kan du behålla dem här */
+.LogaNamn {
+    grid-area: 1 / 2 / 2 / 4; 
+    background-color: lightblue; 
+}
+
+.Kategorier {
+    grid-area: 1 / 4 / 2 / 5; 
+    background-color: lightgreen; 
+}
+
+.LagInAnnons {
+    grid-area: 1 / 7 / 2 / 8; 
+    background-color: lightyellow; 
+}
+
+.Search {
+    grid-area: 1 / 8 / 2 / 10; 
+    background-color: lightcoral; 
+}
+
+.LogSignIn {
+    grid-area: 1 / 11 / 2 / 12; 
+    background-color: lightpink; 
+}
