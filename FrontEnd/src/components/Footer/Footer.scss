@@ -1,27 +1,28 @@
 .Footer {
     display: grid;
-    grid-template-columns: repeat(8, 1fr); // Definiera kolumnerna
-    grid-template-rows: repeat(2, 1fr); // Definiera raderna
+    grid-template-columns: repeat(8, 1fr); 
+    grid-template-rows: repeat(2, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
-  
-    // Om du vill styla hela footer-diven
-    background-color: lightcoral; // Bakgrundsfärg för Footer
-    height: 100px; // Justera efter behov
+    background-color: lightcoral; 
+    height: 200px;
   }
+  .div1, .div2, .div3 {
+    font-size: clamp(0.8rem, 2.5vw, 1.5rem);
+}
   
   .div1 {
-    grid-area: 1 / 2 / 4 / 4; // Definiera grid-området för div1
-    background-color: rgba(98, 37, 37, 0.8); // Exempel på bakgrundsfärg
+    grid-area: 1 / 2 / 4 / 4; 
+    background-color: rgba(98, 37, 37, 0.8);
   }
   
   .div2 {
-    grid-area: 1 / 4 / 3 / 6; // Definiera grid-området för div2
-    background-color: rgba(255, 255, 255, 0.8); // Exempel på bakgrundsfärg
+    grid-area: 1 / 4 / 3 / 6;
+    background-color: rgba(255, 255, 255, 0.8);
   }
   
   .div3 {
-    grid-area: 1 / 6 / 3 / 8; // Definiera grid-området för div3
-    background-color: rgba(88, 9, 85, 0.8); // Exempel på bakgrundsfärg
+    grid-area: 1 / 6 / 3 / 8;
+    background-color: rgba(88, 9, 85, 0.8);
   }
   
