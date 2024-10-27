@@ -16,7 +16,7 @@ const App = () => {
     <Router>
       <div>
         <button onClick={handleOpenModal}>Logga in / Registrera</button>
-        {isModalOpen && <AuthModal onClose={handleCloseModal} />} {/* Visa modalen om isModalOpen är true */}
+        {isModalOpen && <AuthModal onClose={handleCloseModal} />} 
         
         <Routes>
           <Route path="/" element={<Home />} />
