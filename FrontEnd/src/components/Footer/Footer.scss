@@ -5,10 +5,10 @@
     grid-column-gap: 0px;
     grid-row-gap: 0px;
     background-color: lightcoral; 
-    height: 200px;
+    font-size: 2vw;
   }
   .div1, .div2, .div3 {
-    font-size: clamp(0.8rem, 2.5vw, 1.5rem);
+    font-size: 1.5vw;
 }
   
   .div1 {

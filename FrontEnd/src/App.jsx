@@ -7,17 +7,10 @@ import About from './Pages/About';
 import AuthModal from './components/LogSingIn/AuthModal';
 
 const App = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleOpenModal = () => setIsModalOpen(true);
-  const handleCloseModal = () => setIsModalOpen(false);
 
   return (
     <Router>
       <div>
-        <button onClick={handleOpenModal}>Logga in / Registrera</button>
-        {isModalOpen && <AuthModal onClose={handleCloseModal} />} 
-        
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/annonser" element={<ViewItem />} />
