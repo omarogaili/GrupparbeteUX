@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "AZcdLR2UjaY4nFX15FbfCEySHJjY5rHwMEJUtcFWuwPWDiMaF61Pi8L7E2xIR4jSUIkg7J+jpQawBk9qyZbjIw==",
+  "dgSpecHash": "4NUvUyeCmoN2AMpkJ3a90zOXvnxmJ159MuOt7qW3atkHCPrZLttZmXcji1fhK1Csi22P6YysPxawUOryhosCew==",
   "success": true,
-  "projectFilePath": "/home/omar/Desktop/Desktop-omar/UX/Grupparbete/CoreServicesApi/CoreServicesApi.csproj",
+  "projectFilePath": "/home/omar/Desktop/Desktop-omar/GrupparbeteUX/CoreServicesApi/CoreServicesApi.csproj",
   "expectedPackageFiles": [
     "/home/omar/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/home/omar/.nuget/packages/microsoft.aspnetcore.openapi/8.0.10/microsoft.aspnetcore.openapi.8.0.10.nupkg.sha512",

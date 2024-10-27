@@ -14,6 +14,6 @@ namespace Models
         public int BillId { get; set; }
         public List<Bill>? Bills { get; set; }
         public int itemId { get; set; }
-        public List<Item>? Items { get; set; }
+        public List<Product>? Items { get; set; }
     }
 }

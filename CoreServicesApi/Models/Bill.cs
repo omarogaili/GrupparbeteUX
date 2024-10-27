@@ -13,7 +13,7 @@ namespace Models
         [ForeignKey("UserId")]
         public int UserId { get; set; }
         public User? User { get; set; }
-        public List<Item> Items { get; set; } = new List<Item>();
+        public List<Product> Items { get; set; } = new List<Product>();
     }
 
 }

@@ -6,5 +6,6 @@ namespace Validation
         public bool IsPasswordValid(string password);
         public bool IsValidName(string name);
         public Task<bool> IsTheNameUsed(string name);
+        
     }
 }

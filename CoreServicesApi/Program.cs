@@ -2,6 +2,7 @@ using Models;
 using Services;
 using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using EndPoints;
 internal class Program
 {
     private static void Main(string[] args)
@@ -13,6 +14,7 @@ internal class Program
                 options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
             });
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+            builder.Services.AddScoped<IUseService, UserService>();
         // Add services to the container.
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
@@ -25,6 +27,7 @@ internal class Program
             app.UseSwaggerUI();
         }
         app.UseHttpsRedirection();
+        app.MapUserEndpoints();
         app.Run();
     }
 }

@@ -25,7 +25,6 @@ namespace Services
             _hashAlgorithm = new PasswordHasher<User>();
             validationEmployee = new EmpolyeeValidation(context, connectionString);
         }
-
         public User GetUserById(string userName)
         {
             using (var connection = new MySqlConnection(_connectionString))
