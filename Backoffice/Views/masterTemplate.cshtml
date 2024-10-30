@@ -1,5 +1,34 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.Models;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
-	Layout = null;
+    Layout = null;
 }
+
+<h1>@Model.Value("handlerName")</h1>
+<div>
+    @{
+        var selection = Umbraco.Content(Guid.Parse("30013f55-04df-4560-b671-e09284dccd7e"))
+            .ChildrenOfType("productPage")
+            .Where(x => x.IsVisible());
+    }
+    <ul>
+        @foreach (var item in selection)
+        {
+            <li>
+                <a href="@item.Url()">
+                    @{
+                        // Hämta bilden från den aktuella produkten
+                        var productsImage = item.Value<MediaWithCrops>("productImage");
+                        if (productsImage != null)
+                        {
+                            <img src="@productsImage.MediaUrl()" style="width: 300px" alt="Product Image" />
+                        }
+                    }
+                    <!-- @item.Name() -->
+                </a>
+            </li>
+        }
+    </ul>
+</div>
+
