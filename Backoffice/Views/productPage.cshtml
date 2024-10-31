@@ -1,0 +1,16 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+	Layout = null;
+}
+<h3>@Model.Value("productsName")</h3>
+@{
+		var productsImage= Model.Value<MediaWithCrops>("productImage");
+		if (productsImage!= null)
+        {
+            <img src="@productsImage.MediaUrl()" alt="Product Image"  />
+        }
+}
+<p>@Model.Value("description")</p>
+<p>@Model.Value("price")</p>
