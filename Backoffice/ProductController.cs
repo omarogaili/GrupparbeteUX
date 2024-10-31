@@ -17,35 +17,6 @@ namespace Backoffice.Controllers
             _umbracoContextAccessor = umbracoContextAccessor;
         }
         [HttpGet("products")]
-        // public IActionResult GetProducts()
-        // {
-        //     var umbracoContext = _umbracoContextAccessor.GetRequiredUmbracoContext();
-
-        //     // Hämta alla produkter som är barn till 'productHandler'
-        //     var productHandlers = umbracoContext.Content!.GetAtRoot()
-        //         .Where(x => x.ContentType.Alias == "productHandler")
-        //         .SelectMany(x => x.Children) // Hämta barnen till varje 'productHandler'
-        //         .Where(x => x.ContentType.Alias == "productPage") // Filtrera på barn av typen 'productPage'
-        //         .Select(x => new
-        //         {
-        //             Id = x.Id,
-        //             Logo = x.Value<string>("logo"),
-        //             HandlerName = x.Value<string>("handlerName"),
-        //             Copywriter = x.Value<decimal?>("copywriter"),
-        //             Description = x.Value<string>("description"),
-        //             Price = x.Value<decimal>("price"),
-        //             productName= x.Value<string>("productsName"),
-        //             ImageUrl = x.Value<IPublishedContent>("productImage")?.Url() 
-        //             // ImageContent = x.Value<IPublishedContent>("productImage") // Ingen 'var' här
-        //         })
-        //         .ToList();
-
-        //     if (!productHandlers.Any())
-        //     {
-        //         return NotFound();
-        //     }
-        //     return Ok(productHandlers);
-        // }
         public IActionResult GetProducts()
         {
             var umbracoContext = _umbracoContextAccessor.GetRequiredUmbracoContext();
