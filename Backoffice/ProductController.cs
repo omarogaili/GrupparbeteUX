@@ -5,7 +5,7 @@ using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Web.Common.PublishedModels;
 using System.Linq;
 
-namespace Backoffice.Controllers
+namespace Backoffice
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -43,6 +43,36 @@ namespace Backoffice.Controllers
                 return NotFound();
             }
             return Ok(productHandlers);
+        }
+        [HttpGet("category")]
+        public IActionResult GetCategory(string category)
+        {
+            var request = HttpContext.Request;
+            var baseUrl = $"{request.Scheme}://{request.Host}";
+            var umbracoContext = _umbracoContextAccessor.GetRequiredUmbracoContext();
+            var products = umbracoContext.Content!.GetAtRoot()
+                .FirstOrDefault(x => x.ContentType.Alias == "productHandler")
+                ?.DescendantsOrSelf()
+                .Where(p => p.ContentType.Alias == "productPage" && p.Value<string>("category") == category)
+                .Select(p => new
+                {
+                    Id = p.Id,
+                    ProductName = p.Value<string>("productsName"),
+                    Category = p.Value<string>("category"),
+                    Description = p.Value<string>("description"),
+                    ImageUrl = p.Value<IPublishedContent>("productImage") != null
+                        ? $"{baseUrl}{p.Value<IPublishedContent>("productImage").Url()}"
+                        : null
+
+                })
+                .ToList();
+
+            if (products == null || !products.Any())
+            {
+                return NotFound($"No products found in category '{category}'.");
+            }
+
+            return Ok(products);
         }
     }
 }
