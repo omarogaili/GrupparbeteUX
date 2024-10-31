@@ -7,7 +7,6 @@ internal class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        // Lägg till tjänster
         builder.Services.AddCors(options =>
         {
             options.AddPolicy("AllowAllOrigins", builder =>
@@ -17,8 +16,6 @@ internal class Program
                        .AllowAnyHeader();
             });
         });
-
-        // Konfigurera Umbraco
         builder.CreateUmbracoBuilder()
             .AddBackOffice()
             .AddWebsite()
@@ -26,11 +23,7 @@ internal class Program
             .Build();
 
         var app = builder.Build();
-
-        // Aktivera CORS
         app.UseCors("AllowAllOrigins");
-
-        // Starta Umbraco
         await app.BootUmbracoAsync();
 
         app.UseUmbraco()
@@ -44,8 +37,6 @@ internal class Program
                 u.UseBackOfficeEndpoints();
                 u.UseWebsiteEndpoints();
             });
-
-        // Kör appen
         await app.RunAsync();
     }
 }
