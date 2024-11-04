@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Models;
 
@@ -15,25 +16,31 @@ namespace CoreServicesApi.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.10");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "8.0.10")
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
             modelBuilder.Entity("Models.Bill", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Cargo")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<decimal>("TotalAmount")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("decimal(65,30)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("INTEGER");
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -46,28 +53,30 @@ namespace CoreServicesApi.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("EmployeeEmail")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("EmployeeName")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext");
 
                     b.Property<int?>("ManagerId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("Password")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Role")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext");
 
                     b.Property<decimal>("Salary")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("decimal(65,30)");
 
                     b.HasKey("Id");
 
@@ -80,31 +89,28 @@ namespace CoreServicesApi.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
-                    b.Property<int>("BillId")
-                        .HasColumnType("INTEGER");
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("BillId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Image")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Name")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext");
 
                     b.Property<double?>("Price")
-                        .HasColumnType("REAL");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("double");
 
                     b.HasKey("Id");
 
                     b.HasIndex("BillId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Products");
                 });
@@ -113,28 +119,24 @@ namespace CoreServicesApi.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("BillId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("longtext");
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Email")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Name")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Password")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("itemId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -144,10 +146,8 @@ namespace CoreServicesApi.Migrations
             modelBuilder.Entity("Models.Bill", b =>
                 {
                     b.HasOne("Models.User", "User")
-                        .WithMany("Bills")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });
@@ -166,30 +166,13 @@ namespace CoreServicesApi.Migrations
                 {
                     b.HasOne("Models.Bill", "Bill")
                         .WithMany("Items")
-                        .HasForeignKey("BillId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Models.User", "User")
-                        .WithMany("Items")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BillId");
 
                     b.Navigation("Bill");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Models.Bill", b =>
                 {
-                    b.Navigation("Items");
-                });
-
-            modelBuilder.Entity("Models.User", b =>
-                {
-                    b.Navigation("Bills");
-
                     b.Navigation("Items");
                 });
 #pragma warning restore 612, 618

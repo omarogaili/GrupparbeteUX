@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Models;
 public class Product
 {
@@ -6,10 +8,7 @@ public class Product
     public string? Description { get; set; }
     public double? Price { get; set; }
     public string? Image { get; set; }
-
-    public int BillId { get; set; }
+    [ForeignKey ("BillId")]
+    public int? BillId { get; set; }
     public Bill? Bill { get; set; }
-
-    public int UserId { get; set; }
-    public User? User { get; set; }
 }
