@@ -39,19 +39,11 @@ public class EmpolyeeValidation : IBaseValidation
         {
             throw new ArgumentException("Password must be at least 8 characters");
         }
-        else
-        {
-            var regexItem = new Regex("^[a-zA-Z0-9 ]*$");
-            if (regexItem.IsMatch(password))
-            {
-                return true;
-            }
-            return password.Length <= 8;
-        }
+        return password.Length <= 8;
     }
     public async Task<bool> IsTheNameUsed(string name)
     {
-        var usedName = await _context?.Employees.FirstOrDefaultAsync(e => e.EmployeeName == name)!;
+        var usedName = await _context?.Users.FirstOrDefaultAsync(e => e.Name == name)!;
         if(usedName != null)
         {
             throw new ArgumentException($"The name {name} is already used");
