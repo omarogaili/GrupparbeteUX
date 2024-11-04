@@ -1,0 +1,23 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+    Layout = "masterTemplate.cshtml";
+}
+
+<header>
+    @{
+        var logo = Model.Value<MediaWithCrops>("logo");
+        if (logo != null)
+        {
+            <img src="@logo.MediaUrl()" alt="LOGO" />
+        }
+    }
+</header>
+<div>
+    
+</div>
+
+<footer>
+    @Model.Value("copywriter")
+</footer>
