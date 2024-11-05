@@ -31,15 +31,18 @@ const AuthModal = ({ onClose }) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          username: formData.username,
-          password: formData.password,
+          userEmail: formData.email,  
+          userPassword: formData.password,
         }),
       });
-      const data = await response.json();
+      
       if (response.ok) {
-        alert('Inloggning lyckades');
+        const responseData = await response.json();
+        alert('Inloggning lyckades: ' + JSON.stringify(responseData));
       } else {
-        alert(data.message || 'Inloggning misslyckades');
+        const errorData = await response.json();
+        console.error('Error logging in:', errorData);
+        alert(errorData.message || 'Inloggning misslyckades');
       }
     } catch (error) {
       console.error('Error logging in:', error);
@@ -50,15 +53,15 @@ const AuthModal = ({ onClose }) => {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5051/api/api/Signup', {
+      const response = await fetch('http://localhost:5051/api/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          username: formData.username,
-          email: formData.email,
-          password: formData.password,
+          userName: formData.username,  
+          userEmail: formData.email,     
+          userPassword: formData.password
         }),
       });
       const data = await response.json();
@@ -91,10 +94,10 @@ const AuthModal = ({ onClose }) => {
               <h2>Logga in</h2>
               <form onSubmit={handleLogin}>
                 <input
-                  type="text"
-                  name="username"
-                  placeholder="Användarnamn"
-                  value={formData.username}
+                  type="email"
+                  name="email"
+                  placeholder="E-post"
+                  value={formData.email}
                   onChange={handleChange}
                 />
                 <input

@@ -4,7 +4,10 @@ using Umbraco.Cms.Web.Common.Controllers;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Web.Common.PublishedModels;
 using System.Linq;
-
+/// <summary>
+/// more categories => 5 products for each.
+/// Products Name not working.   
+/// </summary>
 namespace Backoffice.Controllers
 {
     [Route("api/[controller]")]
