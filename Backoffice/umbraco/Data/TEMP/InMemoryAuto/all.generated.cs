@@ -6,7 +6,7 @@ using  Umbraco.Cms.Infrastructure.ModelsBuilder;
 using  Umbraco.Cms.Core;
 using  Umbraco.Extensions;
 [assembly:ModelsBuilderAssembly(IsInMemory = true, SourceHash = "f2887041870612143b03bd4947be60d2340b7fb8")]
-[assembly:System.Reflection.AssemblyVersion("0.0.0.2")]
+[assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
 
 
 // FILE: models.generated.cs

@@ -15,19 +15,19 @@
     <ul>
         @foreach (var item in selection)
         {
+            <li><h3>@item.Value("productsName")</h3></li>
             <li>
                 <a href="@item.Url()">
                     @{
-                        // Hämta bilden från den aktuella produkten
                         var productsImage = item.Value<MediaWithCrops>("productImage");
                         if (productsImage != null)
                         {
                             <img src="@productsImage.MediaUrl()" style="width: 300px" alt="Product Image" />
                         }
                     }
-                    <!-- @item.Name() -->
                 </a>
             </li>
+            <li>@item.Value("price")</li>
         }
     </ul>
 </div>

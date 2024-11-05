@@ -32,10 +32,11 @@ namespace Backoffice.Controllers
                 .Select(x => new
                 {
                     Id = x.Id,
-                    Logo = x.Value<string>("logo"),
-                    HandlerName = x.Value<string>("handlerName"),
-                    Copywriter = x.Value<string>("copywriter"),
-                    ProductName = x.Value<string>("productName"),
+                    HandlerName = x.Value<string>("handlersName"),
+                    ProductName = x.Value<string>("productsName"),
+                    Category = x.Value<string>("category"),
+                    Description = x.Value<string>("description"),
+                    Price = x.Value<int>("price"),
                     ImageUrl = x.Value<IPublishedContent>("productImage") != null
                         ? $"{baseUrl}{x.Value<IPublishedContent>("productImage").Url()}"
                         : null
