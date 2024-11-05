@@ -52,10 +52,18 @@ namespace Services
         }
         public async Task<User> AddUser(User user)
         {
-            // if (!validationEmployee.IsValidName(user.Name!) || !validationEmployee.IsValidEmail(user.Email!) || !validationEmployee.IsPasswordValid(user.Password!))
-            // {
-            //     throw new ArgumentException("Invalid employee name");
-            // }
+            if (!validationEmployee.IsValidName(user.Name!))
+            {
+                throw new ArgumentException("Invalid Username: Must start with a letter, contain only letters and numbers, and be 6-12 characters long.");
+            }
+            if (!validationEmployee.IsValidEmail(user.Email!))
+            {
+                throw new ArgumentException("Invalid Email: You need to enter a valid email address.");
+            }
+            if (!validationEmployee.IsPasswordValid(user.Password!))
+            {
+                throw new ArgumentException("Invalid Password: Password must be at least 8 characters.");
+            }
             user.Password = _hashAlgorithm!.HashPassword(user, user.Password!);
             _context!.Users.Add(user);
             await _context.SaveChangesAsync();
@@ -63,10 +71,10 @@ namespace Services
         }
         public async Task<User> UpdateUser(User user)
         {
-            // if (!validationEmployee.IsValidName(user.Name!) || !validationEmployee.IsValidEmail(user.Email!) || !validationEmployee.IsPasswordValid(user.Password!))
-            // {
-            //     throw new ArgumentException("Invalid user data");
-            // }
+            if (!validationEmployee.IsValidName(user.Name!) || !validationEmployee.IsValidEmail(user.Email!) || !validationEmployee.IsPasswordValid(user.Password!))
+            {
+                throw new ArgumentException("Invalid user data");
+            }
             var existingUser = await _context!.Users.FindAsync(user.Id);
             if (existingUser == null)
             {
@@ -87,7 +95,7 @@ namespace Services
             {
                 throw new ArgumentException("Employee not found");
             }
-            existingUser.Name= user.Name;
+            existingUser.Name = user.Name;
             existingUser.Email = user.Email;
             existingUser.Password = user.Password;
             _context!.Users.Remove(user);
