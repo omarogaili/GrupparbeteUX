@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 namespace EndPoints;
-
 public static class UserEndpoints
 {
     private const string _tag = "user";
