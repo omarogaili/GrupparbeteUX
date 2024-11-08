@@ -468,7 +468,7 @@ umbraco-package-schema.json
 # /umbraco/Data/CreatedPackages/
 
 # # Temp folder containing Examine indexes, NuCache, MediaCache, etc.
-# /umbraco/Data/TEMP/
+/umbraco/Data/TEMP/
 
 # # SQLite database files
 # /umbraco/Data/*.sqlite.db

@@ -22,20 +22,27 @@ internal class Program
                     .AllowAnyHeader();
         });
     });
+        builder.Services.AddAuthentication("Cookies")
+        .AddCookie("Cookies", options =>
+        {
+            options.LoginPath = "/login";
+            options.LogoutPath = "/logout";
+            options.ExpireTimeSpan = TimeSpan.FromHours(1);
+        });
+        builder.Services.AddAuthorization();
         builder.Services.AddScoped<IEmployeeService, EmployeeService>();
         builder.Services.AddScoped<IUseService, UserService>();
-        // Add services to the container.
-        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         var app = builder.Build();
-        // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
             app.UseSwaggerUI();
         }
         app.UseCors("AllowReactApp");
+        app.UseAuthentication();
+        app.UseAuthorization();
         app.UseHttpsRedirection();
         app.MapUserEndpoints();
         app.Run();

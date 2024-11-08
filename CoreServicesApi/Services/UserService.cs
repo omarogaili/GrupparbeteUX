@@ -30,10 +30,10 @@ namespace Services
             using (var connection = new MySqlConnection(_connectionString))
             {
                 connection.Open();
-                string query = "SELECT * FROM Users WHERE Name = @name";
+                string query = "SELECT * FROM Users WHERE Email = @name";
                 using (var command = new MySqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@email", userName);
+                    command.Parameters.AddWithValue("@name", userName);
                     using (var reader = command.ExecuteReader())
                     {
                         if (reader.Read())
@@ -52,31 +52,52 @@ namespace Services
         }
         public async Task<User> AddUser(User user)
         {
-            if (!validationEmployee.IsValidName(user.Name!) || !validationEmployee.IsValidEmail(user.Email!) || !validationEmployee.IsPasswordValid(user.Password!))
+            if (!validationEmployee.IsValidName(user.Name!))
             {
-                throw new ArgumentException("Invalid employee name");
+                throw new ArgumentException("Invalid Username: Must start with a letter, contain only letters and numbers, and be 6-12 characters long.");
             }
-            await _context!.Users.AddAsync(user);
-            _context.SaveChanges();
+            if (!validationEmployee.IsValidEmail(user.Email!))
+            {
+                throw new ArgumentException("Invalid Email: You need to enter a valid email address.");
+            }
+            if (!validationEmployee.IsPasswordValid(user.Password!))
+            {
+                throw new ArgumentException("Invalid Password: Password must be at least 8 characters.");
+            }
+            user.Password = _hashAlgorithm!.HashPassword(user, user.Password!);
+            _context!.Users.Add(user);
+            await _context.SaveChangesAsync();
             return user;
         }
         public async Task<User> UpdateUser(User user)
         {
-            if (!validationEmployee.IsValidName(user.Name!) || !validationEmployee.IsValidEmail(user.Name!) || !validationEmployee.IsPasswordValid(user.Password!))
+            if (!validationEmployee.IsValidName(user.Name!) || !validationEmployee.IsValidEmail(user.Email!) || !validationEmployee.IsPasswordValid(user.Password!))
             {
-                throw new ArgumentException("Invalid employee name");
+                throw new ArgumentException("Invalid user data");
             }
-            _context!.Users.Update(user);
+            var existingUser = await _context!.Users.FindAsync(user.Id);
+            if (existingUser == null)
+            {
+                throw new ArgumentException("User not found");
+            }
+            existingUser.Name = user.Name;
+            existingUser.Email = user.Email;
+            existingUser.Password = user.Password;
+            existingUser.Password = _hashAlgorithm!.HashPassword(user, user.Password!);
+            _context.Users.Update(existingUser);
             await _context.SaveChangesAsync();
-            return user;
+            return existingUser;
         }
         public async Task<string> DeleteUser(User user)
         {
-            var users = _context!.Users.Find(user.Name);
-            if (users == null)
+            var existingUser = _context!.Users.Find(user.Name);
+            if (existingUser == null)
             {
                 throw new ArgumentException("Employee not found");
             }
+            existingUser.Name = user.Name;
+            existingUser.Email = user.Email;
+            existingUser.Password = user.Password;
             _context!.Users.Remove(user);
             await _context.SaveChangesAsync();
             return "Employee deleted successfully";
@@ -89,7 +110,7 @@ namespace Services
         {
             using (var connection = new MySqlConnection(_connectionString))
             {
-                string query = "SELECT Id, Password FROM Users WHERE Name = @name";
+                string query = "SELECT Id, Password FROM Users WHERE Email = @name";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@name", userName);

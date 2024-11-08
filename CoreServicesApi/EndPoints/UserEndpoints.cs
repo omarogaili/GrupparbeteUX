@@ -1,13 +1,15 @@
 ﻿using Services;
 using Models;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
 namespace EndPoints;
-
 public static class UserEndpoints
 {
     private const string _tag = "user";
     private const string _route_createUser = "/api/Signup";
     private const string _route_SignIn = "/api/login";
-    private const string _route_Info = "/user/id";
+    private const string _route_Info = "/api/id";
     private const string _routeAlluserInformation = "/api/user";
     private const string _contentType = "application/json";
     public static void MapUserEndpoints(this IEndpointRouteBuilder app)
@@ -24,6 +26,10 @@ public static class UserEndpoints
             .WithOpenApi()
             .WithSummary("User sign in")
             .WithTags(_tag);
+        app.MapPut("/api/user/update", UpdateUserAsync)
+            .WithOpenApi()
+            .WithSummary("Update user information")
+            .WithTags(_tag);
     }
     public record UserResponse(int userId, string userName, string userEmail);
     public record CreateUserRequest(string userName, string userEmail, string userPassword);
@@ -34,24 +40,53 @@ public static class UserEndpoints
         await userService.AddUser(user);
         return Results.Created($"/User/{user.Name}", new UserResponse(user.Id, user.Name, user.Email));
     }
+static async Task<IResult> UpdateUserAsync(CreateUserRequest request, IUseService userService, HttpContext httpContext)
+        {
+            var userIdClaim = httpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null)
+            {
+                return Results.Unauthorized();
+            }
+
+            var userId = int.Parse(userIdClaim.Value);
+            var userToUpdate = new User
+            {
+                Id = userId,
+                Name = request.userName,
+                Email = request.userEmail,
+                Password = request.userPassword
+            };
+            try
+            {
+                var updatedUser = await userService.UpdateUser(userToUpdate);
+                return Results.Ok(new CreateUserRequest(updatedUser.Name!, updatedUser.Email!, updatedUser.Password!));
+            }
+            catch (ArgumentException ex)
+            {
+                return Results.BadRequest(new { error = ex.Message });
+            }
+        }
+
     static IResult GetUserByTheId(string name, string password, IUseService userService)
     {
         var user = userService.GetUserById(name);
         return user != null ? Results.Ok(new UserResponse(user.Id, user.Name!, user.Email!)) : Results.NotFound();
     }
-    static async Task<IResult> SignInAsync(SignInRequest request, IUseService userService)
+    static async Task<IResult> SignInAsync(SignInRequest request, IUseService userService, HttpContext httpContext)
     {
         var user = userService.SignInQuery(request.userEmail, request.userPassword);
-        Console.WriteLine($"SignInQuery result for {request.userEmail}: {user.HasValue}");
         if (user.HasValue)
         {
             var userinfo = userService.GetUserById(request.userEmail);
-            return Results.Ok(new UserResponse(user.Value, userinfo.Name, request.userEmail));
-        }
-        else
+            var claims = new List<Claim>
         {
-            Console.WriteLine("Unauthorized: Invalid email or password");
-            return Results.Unauthorized();
+            new Claim(ClaimTypes.Name, userinfo.Name!),
+            new Claim(ClaimTypes.NameIdentifier, userinfo.Id.ToString())
+        };
+            var claimsIdentity = new ClaimsIdentity(claims, "Cookies");
+            await httpContext.SignInAsync("Cookies", new ClaimsPrincipal(claimsIdentity));
+            return Results.Ok(new UserResponse(user.Value, userinfo.Name!, request.userEmail));
         }
+        return Results.Unauthorized();
     }
 }

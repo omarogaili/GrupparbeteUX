@@ -4,7 +4,10 @@ using Umbraco.Cms.Web.Common.Controllers;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Web.Common.PublishedModels;
 using System.Linq;
-
+/// <summary>
+/// more categories => 5 products for each.
+/// Products Name not working.   
+/// </summary>
 namespace Backoffice.Controllers
 {
     [Route("api/[controller]")]
@@ -29,10 +32,11 @@ namespace Backoffice.Controllers
                 .Select(x => new
                 {
                     Id = x.Id,
-                    Logo = x.Value<string>("logo"),
-                    HandlerName = x.Value<string>("handlerName"),
-                    Copywriter = x.Value<string>("copywriter"),
-                    ProductName = x.Value<string>("productName"),
+                    HandlerName = x.Value<string>("handlersName"),
+                    ProductName = x.Value<string>("productsName"),
+                    Category = x.Value<string>("category"),
+                    Description = x.Value<string>("description"),
+                    Price = x.Value<int>("price"),
                     ImageUrl = x.Value<IPublishedContent>("productImage") != null
                         ? $"{baseUrl}{x.Value<IPublishedContent>("productImage").Url()}"
                         : null
