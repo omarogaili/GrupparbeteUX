@@ -9,6 +9,7 @@ const ViewItem = () => {
   const [error, setError] = useState(null);
   const [category, setCategory] = useState('');
 
+  const categories = ['kläder', 'hem', 'sport', 'skor'];
 
   const fetchProducts = async (category) => {
     try {
@@ -41,6 +42,29 @@ const ViewItem = () => {
         <h2>Produkter</h2>
         {loading && <p>Laddar...</p>}
         {error && <p>Fel: {error}</p>}
+        
+        <div className="button-container">
+          <button onClick={() => setCategory('')}>Visa Alla Produkter</button>
+          {categories.map((cat) => (
+            <button key={cat} onClick={() => setCategory(cat)}>
+              Visa {cat.charAt(0).toUpperCase() + cat.slice(1)}
+            </button>
+          ))}
+        </div>
+
+        <select
+          className="category-select"
+          onChange={(e) => setCategory(e.target.value)}
+          value={category}
+        >
+          <option value="">Alla Kategorier</option>
+          {categories.map((cat) => (
+            <option key={cat} value={cat}>
+              {cat.charAt(0).toUpperCase() + cat.slice(1)}
+            </option>
+          ))}
+        </select>
+
         <ul className="product-list">
           {products.map((product) => (
             <li key={product.id} className="product-item">
@@ -52,11 +76,6 @@ const ViewItem = () => {
             </li>
           ))}
         </ul>
-        <div className="button-container">
-          <button onClick={() => setCategory('kläder')}>Visa Kläder</button>
-          <button onClick={() => setCategory('hem')}>Visa Hem</button>
-          <button onClick={() => setCategory('')}>Visa Alla Produkter</button>
-        </div>
       </div>
       <Footer />
     </div>
