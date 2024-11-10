@@ -1,5 +1,117 @@
+/* Body.scss */
+
 .Body {
-    background-color: lightgreen; 
-    height: auto; 
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f4f6f8;
+  min-height: 100vh;
+}
+
+.filter-controls {
+  display: flex;
+  flex-direction: column; /* Alltid staplade i en kolumn */
+  gap: 15px;
+  margin-bottom: 20px;
+  align-items: center;
+  width: 100%;
+  max-width: 500px; /* Sätter en maxbredd för att se bra ut på större skärmar */
+}
+
+.search-input,
+.price-input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%; /* Full bredd inom filter-controls */
+  box-sizing: border-box;
+}
+
+.price-filter {
+  display: flex;
+  gap: 10px;
+  width: 100%; /* Gör så att båda prisinmatningarna täcker full bredd */
+}
+
+.category-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  width: 100%;
+}
+
+.category-button {
+  padding: 8px 15px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f1f1f1;
+  color: black;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #e1e1e1;
   }
-  
+
+  &.active {
+    background-color: #3498db;
+    color: white;
+    border-color: #3498db;
+  }
+}
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.product-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  width: 250px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  h3 {
+    font-size: 18px;
+    color: #333;
+    margin: 0;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  p {
+    font-size: 14px;
+    color: #666;
+    margin: 5px 0;
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  .product-price {
+    font-weight: bold;
+    color: #e67e22;
+  }
+
+  .product-image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+}
