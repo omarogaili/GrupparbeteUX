@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "oep8BlC1AS8=",
+  "dgSpecHash": "rikyxiuLCQQ=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Delza\\OneDrive\\Skrivbord\\allt\\Publiceringsverktyg och UX\\grupp arbete blocket 3\\GrupparbeteUX\\CoreServicesApi\\CoreServicesApi.csproj",
+  "projectFilePath": "C:\\Users\\Delza\\OneDrive\\Skrivbord\\allt\\Publiceringsverktyg och UX\\grupp arbete blocket 4\\GrupparbeteUX\\CoreServicesApi\\CoreServicesApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Delza\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Delza\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.10\\microsoft.aspnetcore.openapi.8.0.10.nupkg.sha512",

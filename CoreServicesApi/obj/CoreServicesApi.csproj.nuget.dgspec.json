@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Delza\\OneDrive\\Skrivbord\\allt\\Publiceringsverktyg och UX\\grupp arbete blocket 3\\GrupparbeteUX\\CoreServicesApi\\CoreServicesApi.csproj": {}
+    "C:\\Users\\Delza\\OneDrive\\Skrivbord\\allt\\Publiceringsverktyg och UX\\grupp arbete blocket 4\\GrupparbeteUX\\CoreServicesApi\\CoreServicesApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Delza\\OneDrive\\Skrivbord\\allt\\Publiceringsverktyg och UX\\grupp arbete blocket 3\\GrupparbeteUX\\CoreServicesApi\\CoreServicesApi.csproj": {
+    "C:\\Users\\Delza\\OneDrive\\Skrivbord\\allt\\Publiceringsverktyg och UX\\grupp arbete blocket 4\\GrupparbeteUX\\CoreServicesApi\\CoreServicesApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Delza\\OneDrive\\Skrivbord\\allt\\Publiceringsverktyg och UX\\grupp arbete blocket 3\\GrupparbeteUX\\CoreServicesApi\\CoreServicesApi.csproj",
+        "projectUniqueName": "C:\\Users\\Delza\\OneDrive\\Skrivbord\\allt\\Publiceringsverktyg och UX\\grupp arbete blocket 4\\GrupparbeteUX\\CoreServicesApi\\CoreServicesApi.csproj",
         "projectName": "CoreServicesApi",
-        "projectPath": "C:\\Users\\Delza\\OneDrive\\Skrivbord\\allt\\Publiceringsverktyg och UX\\grupp arbete blocket 3\\GrupparbeteUX\\CoreServicesApi\\CoreServicesApi.csproj",
+        "projectPath": "C:\\Users\\Delza\\OneDrive\\Skrivbord\\allt\\Publiceringsverktyg och UX\\grupp arbete blocket 4\\GrupparbeteUX\\CoreServicesApi\\CoreServicesApi.csproj",
         "packagesPath": "C:\\Users\\Delza\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Delza\\OneDrive\\Skrivbord\\allt\\Publiceringsverktyg och UX\\grupp arbete blocket 3\\GrupparbeteUX\\CoreServicesApi\\obj\\",
+        "outputPath": "C:\\Users\\Delza\\OneDrive\\Skrivbord\\allt\\Publiceringsverktyg och UX\\grupp arbete blocket 4\\GrupparbeteUX\\CoreServicesApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
