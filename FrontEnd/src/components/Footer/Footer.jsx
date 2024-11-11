@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebook, faTwitter, faTiktok } from '@fortawesome/free-brands-svg-icons';
 import './Footer.scss'; 
 
 const Footer = () => {
@@ -6,16 +8,17 @@ const Footer = () => {
     <div className="Footer">
       <div className="div1">
         <h4>Om Oss</h4>
-        <p>Information om företaget eller sidan.</p>
       </div>
       <div className="div2">
         <h4>Kontakt</h4>
-        <p>Email: info@exempel.se</p>
-        <p>Telefon: 123-456789</p>
       </div>
       <div className="div3">
         <h4>Följ Oss</h4>
-        <p>Sociala medier länkar eller ikoner.</p>
+        <div className="socialMediaIcons">
+          <FontAwesomeIcon icon={faFacebook} className="icon" />
+          <FontAwesomeIcon icon={faTwitter} className="icon" />
+          <FontAwesomeIcon icon={faTiktok} className="icon" />
+        </div>
       </div>
     </div>
   );

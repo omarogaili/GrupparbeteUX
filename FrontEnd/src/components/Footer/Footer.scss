@@ -1,27 +1,61 @@
+/* Footer.scss */
+
 .Footer {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr); // Definiera kolumnerna
-    grid-template-rows: repeat(2, 1fr); // Definiera raderna
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-  
-    // Om du vill styla hela footer-diven
-    background-color: lightcoral; // Bakgrundsfärg för Footer
-    height: 100%; // Justera efter behov
-  }
-  
-  .div1 {
-    grid-area: 1 / 2 / 4 / 4; // Definiera grid-området för div1
-    background-color: rgba(98, 37, 37, 0.8); // Exempel på bakgrundsfärg
-  }
-  
-  .div2 {
-    grid-area: 1 / 4 / 3 / 6; // Definiera grid-området för div2
-    background-color: rgba(255, 255, 255, 0.8); // Exempel på bakgrundsfärg
-  }
-  
-  .div3 {
-    grid-area: 1 / 6 / 3 / 8; // Definiera grid-området för div3
-    background-color: rgba(88, 9, 85, 0.8); // Exempel på bakgrundsfärg
-  }
-  
+  display: grid;
+  grid-template-columns: repeat(8, 1fr); /* Define 8 equal columns */
+  grid-template-rows: 1fr; /* Use a single row */
+  grid-column-gap: 10px; /* Spacing between columns */
+  background-color: #350E0E; /* Dark background color for Footer */
+  padding: 1rem 0; /* Padding for overall footer */
+  color: #fff; /* Text color for footer */
+  text-align: center;
+}
+
+/* Style individual sections in the footer */
+.div1, .div2, .div3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem; /* Adjust font size */
+  font-weight: bold;
+  color: #fff;
+  padding: 1rem;
+  cursor: pointer; /* Adds hand cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth transition for hover */
+}
+
+/* Specific grid placement for each section */
+.div1 {
+  grid-area: 1 / 2 / 2 / 3; /* Position div1 in the grid */
+}
+
+.div2 {
+  grid-area: 1 / 4 / 2 / 5; /* Position div2 in the grid */
+}
+
+.div3 {
+  grid-area: 1 / 6 / 2 / 7; /* Position div3 in the grid */
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between text and icons */
+}
+
+/* Social Media Icons styling */
+.socialMediaIcons {
+  display: flex;
+  flex-direction: row; /* Align icons horizontally */
+  align-items: center;
+}
+
+.icon {
+  font-size: 1.5rem; /* Size of icons */
+  color: #fff;
+  margin-left: 10px; /* Space between each icon */
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.icon:hover {
+  color: #ff9999; /* Change color on hover */
+}
