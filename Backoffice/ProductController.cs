@@ -37,6 +37,7 @@ namespace Backoffice.Controllers
                     Category = x.Value<string>("category"),
                     Description = x.Value<string>("description"),
                     Price = x.Value<int>("price"),
+                    CardDescription= x.Value<string>("cardDescription"),
                     ImageUrl = x.Value<IPublishedContent>("productImage") != null
                         ? $"{baseUrl}{x.Value<IPublishedContent>("productImage").Url()}"
                         : null
@@ -64,6 +65,7 @@ namespace Backoffice.Controllers
                     ProductName = p.Value<string>("productsName"),
                     Category = p.Value<string>("category"),
                     Description = p.Value<string>("description"),
+                    CardDescription= p.Value<string>("cardDescription"),
                     ImageUrl = p.Value<IPublishedContent>("productImage") != null
                         ? $"{baseUrl}{p.Value<IPublishedContent>("productImage").Url()}"
                         : null
@@ -74,6 +76,31 @@ namespace Backoffice.Controllers
                 return NotFound($"No products found in category '{category}'.");
             }
             return Ok(products);
+        }
+        [HttpGet("product/{id:int}")]
+        public IActionResult GetProductById(int id)
+        {
+            var umbracoContext = _umbracoContextAccessor.GetRequiredUmbracoContext();
+            var request = HttpContext.Request;
+            var baseUrl = $"{request.Scheme}://{request.Host}";
+            var product = umbracoContext.Content!.GetById(id);
+            if (product == null || product.ContentType.Alias != "productPage")
+            {
+                return NotFound($"Product with ID '{id}' not found.");
+            }
+            var productDetails = new
+            {
+                Id = product.Id,
+                ProductName = product.Value<string>("productsName"),
+                Category = product.Value<string>("category"),
+                Description = product.Value<string>("description"),
+                Price = product.Value<int>("price"),
+                CardDescription= product.Value<string>("cardDescription"),
+                ImageUrl = product.Value<IPublishedContent>("productImage") != null
+                    ? $"{baseUrl}{product.Value<IPublishedContent>("productImage").Url()}"
+                    : null
+            };
+            return Ok(productDetails);
         }
     }
 }
