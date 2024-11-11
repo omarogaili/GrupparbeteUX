@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './Body.scss';
 
 const Body = () => {
@@ -80,16 +81,17 @@ const Body = () => {
           ))}
         </div>
       </div>
-
       <div className="product-list">
         {filteredProducts.map(product => (
-          <div key={product.id} className="product-card">
-            <h3>{product.productName}</h3>
-            <img src={product.imageUrl} alt={product.productName} className="product-image" />
-            <p>Kategori: {product.category || 'Ingen kategori'}</p>
-            <p className="product-price">Pris: {product.price} SEK</p>
-            <p dangerouslySetInnerHTML={{ __html: product.description }}></p>
-          </div>
+          <Link to={`/product/${product.id}`} key={product.id} className="product-link">
+            <div className="product-card">
+              <h3>{product.productName}</h3>
+              <img src={product.imageUrl} alt={product.productName} className="product-image" />
+              <p>Kategori: {product.category || 'Ingen kategori'}</p>
+              <p className="product-price">Pris: {product.price} SEK</p>
+              <p dangerouslySetInnerHTML={{ __html: product.cardDescription }}></p>
+            </div>
+          </Link>
         ))}
       </div>
     </div>
