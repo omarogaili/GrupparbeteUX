@@ -109,14 +109,16 @@ namespace Services
         public async Task<User?> SignInQuery(string email, string password)
         {
             var user = await _context!.Users.FirstOrDefaultAsync(u => u.Email == email);
-
             if (user == null) return null;
-
             var passwordHasher = new PasswordHasher<User>();
-            var result = passwordHasher.VerifyHashedPassword(user, user.Password, password);
-
+            var result = passwordHasher.VerifyHashedPassword(user, user.Password!, password);
             return result == PasswordVerificationResult.Success ? user : null;
         }
-
+            public async Task<Bill> AddBill(Bill bill)
+        {
+            _context!.Bills.Add(bill);
+            await _context.SaveChangesAsync();
+            return bill;
+        }
     }
 }

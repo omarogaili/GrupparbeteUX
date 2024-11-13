@@ -8,5 +8,6 @@ namespace Services
         public Task<User> UpdateUser(User user);
         public Task<string> DeleteUser(User user);
         public Task<User> SignInQuery(string userEmail, string password);
+        public Task<Bill> AddBill(Bill bill);
     }
 }

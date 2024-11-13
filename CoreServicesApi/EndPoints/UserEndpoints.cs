@@ -3,6 +3,7 @@ using Models;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EndPoints;
 
@@ -15,6 +16,9 @@ public static class UserEndpoints
     private const string _routeAlluserInformation = "/api/user";
     private const string _route_signout = "/api/logout";
     private const string _contentType = "application/json";
+    private const string _bill_Tag = "bill";
+    private const string _route_Bill = "/api/Bill";
+
 
     public static void MapUserEndpoints(this IEndpointRouteBuilder app)
     {
@@ -42,9 +46,14 @@ public static class UserEndpoints
             .WithOpenApi()
             .WithSummary("User sign out")
             .WithTags(_tag);
+        app.MapPost(_route_Bill, AddBill)
+            .WithOpenApi()
+            .WithSummary("Create Bill")
+            .WithTags(_bill_Tag);
     }
 
     public record UserResponse(int userId, string userName, string userEmail);
+    public record BillRequest(decimal TotalAmount, DateTime CreatedAt,string ProductName ,string? UserName = null, string? UserEmail = null, string? Address = null);
     public record CreateUserRequest(string userName, string userEmail, string userPassword);
     public record SignInRequest(string userEmail, string userPassword);
 
@@ -81,7 +90,6 @@ public static class UserEndpoints
             return Results.BadRequest(new { error = ex.Message });
         }
     }
-
     static IResult GetUserInfo(HttpContext httpContext, IUseService userService)
     {
         var userEmail = httpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -89,20 +97,16 @@ public static class UserEndpoints
         {
             return Results.Unauthorized();
         }
-
         var user = userService.GetUserById(userEmail);
         if (user != null)
         {
             return Results.Ok(new UserResponse(user.Id, user.Name!, user.Email!));
         }
-
         return Results.NotFound();
     }
-
     static async Task<IResult> SignInAsync(SignInRequest request, IUseService userService, HttpContext httpContext)
     {
         var user = await userService.SignInQuery(request.userEmail, request.userPassword);
-
         if (user != null)
         {
             var claims = new[]
@@ -110,15 +114,11 @@ public static class UserEndpoints
                 new Claim(ClaimTypes.NameIdentifier, user.Email!),
                 new Claim(ClaimTypes.Name, user.Name!)
             };
-
             var claimsIdentity = new ClaimsIdentity(claims, "Cookies");
             var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
-
             await httpContext.SignInAsync("Cookies", claimsPrincipal);
-
             return Results.Ok(new { Message = "Inloggning lyckades" });
         }
-
         return Results.Unauthorized();
     }
 
@@ -126,5 +126,35 @@ public static class UserEndpoints
     {
         await httpContext.SignOutAsync("Cookies");
         return Results.Ok(new { Message = "Utloggning lyckades" });
+    }
+    static async Task<IResult> AddBill(BillRequest request, IUseService useService, HttpContext httpContext)
+    {
+        var userEmail = httpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        User? user = null;
+        if (userEmail != null)
+        {
+            user = useService.GetUserById(userEmail);
+        }
+        var bill = new Bill
+        {
+            TotalAmount = request.TotalAmount,
+            CreatedAt = request.CreatedAt,
+            UserId = user?.Id,
+            UserName = user?.Name ?? request.UserName,
+            UserEmail = user?.Email ?? request.UserEmail,
+            Address = user?.Address ?? request.Address,
+            productName = request.ProductName
+        };
+        await useService.AddBill(bill);
+        return Results.Ok(new
+        {
+            BillId = bill.Id,
+            TotalAmount = bill.TotalAmount,
+            CreatedAt = bill.CreatedAt,
+            UserName = bill.UserName,
+            UserEmail = bill.UserEmail,
+            Address = bill.Address,
+            productName= bill.productName,
+        });
     }
 }
