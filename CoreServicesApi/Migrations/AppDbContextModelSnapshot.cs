@@ -30,6 +30,9 @@ namespace CoreServicesApi.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Address")
+                        .HasColumnType("longtext");
+
                     b.Property<int>("Cargo")
                         .HasColumnType("int");
 
@@ -39,8 +42,17 @@ namespace CoreServicesApi.Migrations
                     b.Property<decimal>("TotalAmount")
                         .HasColumnType("decimal(65,30)");
 
+                    b.Property<string>("UserEmail")
+                        .HasColumnType("longtext");
+
                     b.Property<int?>("UserId")
                         .HasColumnType("int");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("productName")
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -146,7 +158,7 @@ namespace CoreServicesApi.Migrations
             modelBuilder.Entity("Models.Bill", b =>
                 {
                     b.HasOne("Models.User", "User")
-                        .WithMany()
+                        .WithMany("Bills")
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
@@ -156,8 +168,7 @@ namespace CoreServicesApi.Migrations
                 {
                     b.HasOne("Models.Employee", "Manager")
                         .WithMany()
-                        .HasForeignKey("ManagerId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("ManagerId");
 
                     b.Navigation("Manager");
                 });
@@ -174,6 +185,11 @@ namespace CoreServicesApi.Migrations
             modelBuilder.Entity("Models.Bill", b =>
                 {
                     b.Navigation("Items");
+                });
+
+            modelBuilder.Entity("Models.User", b =>
+                {
+                    b.Navigation("Bills");
                 });
 #pragma warning restore 612, 618
         }

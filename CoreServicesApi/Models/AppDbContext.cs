@@ -12,10 +12,9 @@ public class AppDbContext : DbContext
     }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Employee>()
-                    .HasOne(e => e.Manager)
-                    .WithMany()
-                    .HasForeignKey(e => e.ManagerId)
-                    .OnDelete(DeleteBehavior.Restrict);
+        modelBuilder.Entity<Bill>()
+            .HasOne(i => i.User)
+            .WithMany(u => u.Bills)
+            .HasForeignKey(i => i.UserId);
     }
 }
