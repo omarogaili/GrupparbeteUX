@@ -1,1 +1,50 @@
-/*# sourceMappingURL=styles.css.map */
+.MainContainer {
+  margin-left: 4em;
+  display: flex;
+  flex-direction: row;
+  gap: 2em;
+  align-items: center;
+}
+.MainContainer .CardContainer {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #272727;
+  color: #FFFFFF;
+  border-radius: 20px;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+}
+.MainContainer .CardContainer img {
+  width: 350px;
+  height: 350px;
+}
+.MainContainer .CardContainer .CardLinks {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  align-items: center;
+}
+.MainContainer .CardContainer .CardLinks a {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+.MainContainer .CardContainer .CardLinks button {
+  background-color: rgb(0, 0, 0);
+  transition-duration: 0.4s;
+}
+.MainContainer .CardContainer .CardLinks button:hover {
+  background-color: rgb(58, 94, 211);
+  color: white;
+}
+@media only screen and (max-width: 768px) {
+  .MainContainer {
+    flex-direction: column !important;
+    margin-left: 0;
+  }
+  .MainContainer .CardContainer img {
+    width: 100%;
+    height: 100%;
+  }
+}/*# sourceMappingURL=styles.css.map */
