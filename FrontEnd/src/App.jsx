@@ -4,7 +4,7 @@ import Home from './Pages/Home';
 import ViewItem from './Pages/ViewItem';
 import AddItem from './Pages/AddItem';
 import About from './Pages/About';
-import Dashboard from './Pages/Dashboard';
+import Dashboard from './Pages/Dashboard/Dashboard';
 import Cart from './components/ProductList/Cart';
 import AuthModal from './components/LogSingIn/AuthModal';
 import ProductDetail from './components/ProductList/ProductList';

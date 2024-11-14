@@ -13,6 +13,10 @@
   text-decoration: none;
 }
 
+.searchResults {
+  color: whitesmoke;
+}
+
 .filter-controls {
   display: flex;
   flex-direction: column; /* Alltid staplade i en kolumn */
@@ -62,7 +66,7 @@
   color: white;
 }
 .category-button.active {
-  background-color: #3498db;
+  background-color: #274e68;
   color: white;
   border-color: #3498db;
 }

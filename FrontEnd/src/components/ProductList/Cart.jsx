@@ -1,5 +1,7 @@
 import   { useState, useEffect } from 'react';
-
+import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
+import './cart.scss';
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
@@ -34,25 +36,35 @@ const Cart = () => {
             console.error(error);
         }
     };
+    const handleRemovePurchase = async () => {
+        
+            setPurchaseStatus('Köpet har blivit borttagen!');
+            localStorage.removeItem('cart');
+            setCartItems([]);
+            setTotalPrice(0);
+    };
     return (
-        <div>
+        <div className='Container'>
+            <Header />
             <h1>Kundvagn</h1>
             {cartItems.length === 0 ? (
                 <p>Kundvagnen är tom.</p>
             ) : (
-                <div>
+                <div className='cartContainer'>
                     <ul>
                         {cartItems.map((item, index) => (
                             <li key={index}>
-                                {item.productName} - {item.price} SEK
+                                <b>{item.productName}</b> - {item.price} SEK
                             </li>
                         ))}
                     </ul>
                     <p>Totalt pris: {totalPrice} SEK</p>
                     <button onClick={handlePurchase}>Utför köp</button>
+                    <button className='removeItem' onClick={handleRemovePurchase}>Ta bort köp</button>
                     {purchaseStatus && <p>{purchaseStatus}</p>}
                 </div>
             )}
+            <Footer />
         </div>
     );
 };

@@ -1,0 +1,57 @@
+Body {
+  background-color: #1E1E1E;
+}
+
+.Container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  color: #FFFFFF;
+}
+.Container .Footer {
+  margin-top: auto;
+}
+.Container .cartContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: rgb(109, 107, 107);
+  color: rgb(250, 250, 250);
+}
+.Container .cartContainer ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.Container .cartContainer .removeItem {
+  background-color: rgb(206, 111, 111);
+  color: black;
+}
+.Container .cartContainer button {
+  background-color: rgb(71, 206, 111);
+  transition-duration: 0.4s;
+  color: #1E1E1E;
+  font-size: 1em;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.Container .cartContainer button:hover {
+  background-color: rgb(58, 94, 211);
+  color: white;
+}
+@media only screen and (max-width: 768px) {
+  .Container {
+    flex-direction: column !important;
+    width: 100%;
+    margin-left: 0;
+    padding: 0;
+  }
+  .Container .cartContainer {
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+  }
+}/*# sourceMappingURL=cart.css.map */

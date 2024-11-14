@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import Dashboard from '../../Pages/Dashboard';
+import Dashboard from '../../Pages/Dashboard/Dashboard';
 import './AuthModal.scss';
 
 const AuthModal = ({ onClose }) => {
@@ -133,7 +133,7 @@ const AuthModal = ({ onClose }) => {
         <div className="form-container">
           {isLoggedIn ? (
             <div>
-              <Dashboard/>
+              <Dashboard showHeader={false} showFooter={false} />
             </div>
           ) : (
             <>

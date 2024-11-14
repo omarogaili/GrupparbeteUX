@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import CheckBox from'./CheckBox';
+import CheckBox from './CheckBox';
 import './styles.scss'
-
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 const ProductDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
@@ -37,6 +40,7 @@ const ProductDetail = () => {
     if (error) return <p>{error}</p>;
     return (
         <div>
+            <Header />
             {product ? (
                 <div className='MainContainer'>
                     <div className='CardContainer'>
@@ -47,15 +51,20 @@ const ProductDetail = () => {
                         <div className='CardLinks'>
                             <button onClick={addToCart}>Lägg till i korgen</button>
                             <button onClick={() => navigate(-1)}>Gå tillbaka</button>
-                            <Link to="/cart">Gå till kundvagnen</Link>
+                            <Link to="/cart">
+                                <FontAwesomeIcon icon={faCartShopping} className='cartIcon' />
+                            </Link>
                         </div>
                     </div>
-                    <p>Beskrivning: {product.description}</p>
+                    <div className='DescriptionContainer'>
+                        <p><b>Beskrivning:</b><br></br> {product.description}</p>
+                    </div>
                     <CheckBox />
                 </div>
             ) : (
                 <p>Produkten kunde inte hittas.</p>
             )}
+            <Footer />
         </div>
     );
 };

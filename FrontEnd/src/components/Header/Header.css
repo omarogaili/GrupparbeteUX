@@ -6,9 +6,17 @@
   background-color: #350E0E;
   position: relative;
 }
+.Header .cartIcon {
+  color: #ffffff;
+}
+
+.LogaNamn {
+  color: #ffffff;
+}
 
 .LogaNamn img {
-  max-width: 100px; /* Adjust logo size */
+  max-width: 100px;
+  border-radius: 50%;
 }
 
 .Kategorier, .LagInAnnons, .Search, .LogSignIn {
