@@ -12,5 +12,6 @@ namespace Models
         public string? Password { get; set; }
         public string? Address { get; set; }
         public DateTime? CreatedAt { get; set; }
+        public ICollection<Bill> Bills { get; set; } = new List<Bill>()  ;
     }
 }

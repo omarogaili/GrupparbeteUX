@@ -1,0 +1,79 @@
+.auth-modal-overlay {
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+}
+
+.auth-modal {
+  width: 600px;
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.form-toggle {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button.active {
+  background-color: #0056b3;
+}
+
+.form-container {
+  display: flex;
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+}
+
+.form {
+  width: 100%;
+  transition: transform 0.5s ease;
+  position: absolute;
+  top: 0;
+}
+
+.form.active {
+  transform: translateX(0);
+}
+
+.form:not(.active) {
+  transform: translateX(100%);
+}
+
+h2 {
+  margin-bottom: 1rem;
+}
+
+input {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  width: calc(100% - 1rem);
+}
+
+button[type=submit] {
+  width: 100%;
+}
+
+button.close {
+  margin-top: 20px;
+}/*# sourceMappingURL=AuthModal.css.map */

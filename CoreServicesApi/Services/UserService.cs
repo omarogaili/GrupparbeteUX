@@ -25,7 +25,7 @@ namespace Services
             _hashAlgorithm = new PasswordHasher<User>();
             validationEmployee = new EmpolyeeValidation(context, connectionString);
         }
-        public User GetUserById(string userName)
+        public User GetUserById(string userEmail)
         {
             using (var connection = new MySqlConnection(_connectionString))
             {
@@ -33,7 +33,7 @@ namespace Services
                 string query = "SELECT * FROM Users WHERE Email = @name";
                 using (var command = new MySqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@name", userName);
+                    command.Parameters.AddWithValue("@name", userEmail);
                     using (var reader = command.ExecuteReader())
                     {
                         if (reader.Read())
@@ -106,38 +106,19 @@ namespace Services
         {
             return _hashAlgorithm!.VerifyHashedPassword(user, user.Password!, password) != PasswordVerificationResult.Failed;
         }
-        public int? SignInQuery(string userName, string password)
+        public async Task<User?> SignInQuery(string email, string password)
         {
-            using (var connection = new MySqlConnection(_connectionString))
-            {
-                string query = "SELECT Id, Password FROM Users WHERE Email = @name";
-                using (var command = new MySqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@name", userName);
-                    try
-                    {
-                        connection.Open();
-                        using (var reader = command.ExecuteReader())
-                        {
-                            if (reader.Read())
-                            {
-                                var storedPasswordHash = reader["Password"].ToString();
-                                var userId = (int)reader["Id"];
-                                if (VerifyPassword(new User { Password = storedPasswordHash! }, password))
-                                {
-                                    return userId;
-                                }
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                    }
-                }
-            }
-            Console.WriteLine("Login Failed");
-            return null;
+            var user = await _context!.Users.FirstOrDefaultAsync(u => u.Email == email);
+            if (user == null) return null;
+            var passwordHasher = new PasswordHasher<User>();
+            var result = passwordHasher.VerifyHashedPassword(user, user.Password!, password);
+            return result == PasswordVerificationResult.Success ? user : null;
+        }
+            public async Task<Bill> AddBill(Bill bill)
+        {
+            _context!.Bills.Add(bill);
+            await _context.SaveChangesAsync();
+            return bill;
         }
     }
 }

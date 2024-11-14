@@ -3,6 +3,8 @@ using Services;
 using Microsoft.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using EndPoints;
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 internal class Program
 {
     private static void Main(string[] args)
@@ -10,25 +12,31 @@ internal class Program
         var builder = WebApplication.CreateBuilder(args);
         var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
         builder.Services.AddDbContext<AppDbContext>(options =>
-            {
-                options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
-            });
+        {
+            options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+        });
         builder.Services.AddCors(options =>
-    {
-        options.AddPolicy("AllowReactApp", builder =>
         {
-            builder.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader();
+            options.AddPolicy("AllowAll", corsBuilder =>
+            {
+                corsBuilder.WithOrigins("http://localhost:5173")
+                           .AllowAnyMethod()
+                           .AllowAnyHeader()
+                           .AllowCredentials();
+            });
         });
-    });
-        builder.Services.AddAuthentication("Cookies")
-        .AddCookie("Cookies", options =>
-        {
-            options.LoginPath = "/login";
-            options.LogoutPath = "/logout";
-            options.ExpireTimeSpan = TimeSpan.FromHours(1);
-        });
+
+        builder.Services.AddSingleton(new TokenService("Bqo8t7cGmLCSCrk+rqdBwkKsNBiObMhIUYgawiQ5irOlVbi2OxhLXaFfmdNn8Tt4WwRcF2ggCLjACyuuZupd3kdXMKPTt0vKnMUqZuvW5UHUg4+KtwAWIANoDlkJrs2qi04GH+M/C57LRUOjTDFOsgtlvHUzw5m9GIGpMJ1QF2s="));
+        builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(options =>
+            {
+                options.LoginPath = "/login";
+                options.LogoutPath = "/logout";
+                options.ExpireTimeSpan = TimeSpan.FromHours(1);
+                options.Cookie.SameSite = SameSiteMode.None; 
+                options.Cookie.HttpOnly = true; 
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+            });
         builder.Services.AddAuthorization();
         builder.Services.AddScoped<IEmployeeService, EmployeeService>();
         builder.Services.AddScoped<IUseService, UserService>();
@@ -40,7 +48,7 @@ internal class Program
             app.UseSwagger();
             app.UseSwaggerUI();
         }
-        app.UseCors("AllowReactApp");
+        app.UseCors("AllowAll");
         app.UseAuthentication();
         app.UseAuthorization();
         app.UseHttpsRedirection();

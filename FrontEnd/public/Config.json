@@ -1,0 +1,7 @@
+{
+    "apiurl_users": "https://localhost:7091/api/",
+    "apiurl_signin": "https://localhost:7091/api/login",
+    "apiurl_signup": "https://192.168.X.X:7168/api/Signup",
+    "apiurl_comments": "https://192.168.X.X:7168/api/comments",
+    "apiurl_getcomments": "https://192.168.X.X:7168/api/getcomments"
+}
