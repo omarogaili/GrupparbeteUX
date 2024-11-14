@@ -1,61 +1,66 @@
-/* Header.scss */
-
 .Header {
-    display: grid;
-    grid-template-columns: repeat(12, 0.8fr);
-    grid-template-rows: 1fr;
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-    background-color: #350E0E;
-    padding: 0.5rem;
-}
-
-.LogaNamn, .Kategorier, .LagInAnnons, .Search, .LogSignIn {
-    padding: 0.1rem;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-size: 1vw;
-    color: #ffffff; /* Text color for buttons */
+    padding: 0.5rem;
+    background-color: #350E0E;
+    position: relative;
+  }
+  
+  .LogaNamn img {
+    max-width: 100px; /* Adjust logo size */
+  }
+  
+  .Kategorier, .LagInAnnons, .Search, .LogSignIn {
+    margin: 0 10px;
+    color: #ffffff;
     font-weight: bold;
-}
-
-.LogaNamn {
-    grid-area: 1 / 2 / 2 / 4;
-    background-color: #350E0E;
-}
-
-.Kategorier {
-    grid-area: 1 / 4 / 2 / 5;
-    background-color: #350E0E;
-}
-
-.LagInAnnons {
-    grid-area: 1 / 7 / 2 / 8;
-    background-color: #350E0E;
-}
-
-.Search {
-    grid-area: 1 / 8 / 2 / 10;
-    background-color: #350E0E;
-}
-
-.LogSignIn {
-    grid-area: 1 / 11 / 2 / 12;
-    background-color: #350E0E;
-    
-    padding: 0.5rem; /* Adjust padding for icon size */
+  }
+  
+  .HamburgerMenu {
+    display: none;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.LogSignIn:hover {
-    background-color: #682525; /* Darker shade for hover effect */
-}
-
-.LogSignIn svg {
-    font-size: 1.5vw; /* Adjust icon size based on viewport width */
-    color: #ffffff; /* Darker color for the icon */
-}
-
+  }
+  
+  /* Hide MobileMenu by default */
+  .MobileMenu {
+    display: none;
+  }
+  
+  @media (max-width: 768px) {
+    /* Hide desktop links in mobile view */
+    .Kategorier, .LagInAnnons {
+      display: none;
+    }
+  
+    .HamburgerMenu {
+      display: block;
+      font-size: 1.5rem;
+      color: #ffffff;
+    }
+  
+    /* Show MobileMenu only when it's open */
+    .MobileMenu.open {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: #350E0E;
+      width: 100%;
+      text-align: center;
+      padding: 1rem 0;
+    }
+  
+    .MobileMenu a {
+      color: #ffffff;
+      padding: 0.5rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  
+    .MobileMenu a:hover {
+      background-color: #682525;
+    }
+  }
+  

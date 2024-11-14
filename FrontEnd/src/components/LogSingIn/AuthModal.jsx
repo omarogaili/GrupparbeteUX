@@ -69,7 +69,7 @@ const AuthModal = ({ onClose }) => {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5051/api/signup', {
+      const response = await fetch('https://localhost:7091/api/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
