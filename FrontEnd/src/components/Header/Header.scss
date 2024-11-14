@@ -1,66 +1,95 @@
 .Header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem;
-    background-color: #350E0E;
-    position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: #350E0E;
+  position: relative;
+}
+
+.LogaNamn img {
+  max-width: 100px; /* Adjust logo size */
+}
+
+.Kategorier, .LagInAnnons, .Search, .LogSignIn {
+  margin: 0 10px;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.Search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  width: 0;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  opacity: 0;
+  background-color: #fff;
+  transition: width 0.3s ease, opacity 0.3s ease;
+  /* Make the input field take the available space */
+  flex: 1;
+}
+
+.search-icon {
+  cursor: pointer;
+  color: #ffffff;
+  margin-left: 10px; /* Space between input and icon */
+}
+
+/* When the search bar is open */
+.Search input {
+  opacity: 1;
+  width: 200px; /* Adjust width as needed */
+  padding: 0.3rem;
+}
+
+.HamburgerMenu {
+  display: none;
+  cursor: pointer;
+}
+
+.MobileMenu {
+  display: none; /* Hide MobileMenu by default */
+}
+
+@media (max-width: 768px) {
+  /* Hide desktop links in mobile view */
+  .Kategorier, .LagInAnnons {
+    display: none;
   }
-  
-  .LogaNamn img {
-    max-width: 100px; /* Adjust logo size */
-  }
-  
-  .Kategorier, .LagInAnnons, .Search, .LogSignIn {
-    margin: 0 10px;
+
+  .HamburgerMenu {
+    display: block;
+    font-size: 1.5rem;
     color: #ffffff;
+  }
+
+  .MobileMenu.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #350E0E;
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0;
+  }
+
+  .MobileMenu a {
+    color: #ffffff;
+    padding: 0.5rem;
+    text-decoration: none;
     font-weight: bold;
   }
-  
-  .HamburgerMenu {
-    display: none;
-    cursor: pointer;
+
+  .MobileMenu a:hover {
+    background-color: #682525;
   }
-  
-  /* Hide MobileMenu by default */
-  .MobileMenu {
-    display: none;
-  }
-  
-  @media (max-width: 768px) {
-    /* Hide desktop links in mobile view */
-    .Kategorier, .LagInAnnons {
-      display: none;
-    }
-  
-    .HamburgerMenu {
-      display: block;
-      font-size: 1.5rem;
-      color: #ffffff;
-    }
-  
-    /* Show MobileMenu only when it's open */
-    .MobileMenu.open {
-      display: flex;
-      flex-direction: column;
-      position: absolute;
-      top: 100%;
-      right: 0;
-      background-color: #350E0E;
-      width: 100%;
-      text-align: center;
-      padding: 1rem 0;
-    }
-  
-    .MobileMenu a {
-      color: #ffffff;
-      padding: 0.5rem;
-      text-decoration: none;
-      font-weight: bold;
-    }
-  
-    .MobileMenu a:hover {
-      background-color: #682525;
-    }
-  }
-  
+}
