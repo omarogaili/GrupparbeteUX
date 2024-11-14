@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Body.scss';
 
-const Body = () => {
+const Body = ({ searchTerm }) => {
   const [products, setProducts] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
   const [priceFilter, setPriceFilter] = useState({ min: '', max: '' });
   const [selectedCategory, setSelectedCategory] = useState('');
 
@@ -38,14 +37,6 @@ const Body = () => {
   return (
     <div className="Body">
       <div className="filter-controls">
-        <input
-          type="text"
-          placeholder="Sök produktnamn..."
-          value={searchTerm}
-          onChange={e => setSearchTerm(e.target.value)}
-          className="search-input"
-        />
-
         <div className="price-filter">
           <input
             type="number"

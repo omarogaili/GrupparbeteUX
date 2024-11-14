@@ -1,18 +1,27 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faBars, faSearch } from '@fortawesome/free-solid-svg-icons';
 import './Header.scss';
 import AuthModal from '../LogSingIn/AuthModal';
 import CategoryDropdown from '../CategoryDropdown/CategoryDropdown';
 
-const Header = () => {
+const Header = ({ onSearchChange }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchOpen, setSearchOpen] = useState(false);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const toggleSearch = () => setSearchOpen(!searchOpen);
+
+  const handleSearchChange = (e) => {
+    const newSearchTerm = e.target.value;
+    setSearchTerm(newSearchTerm);
+    onSearchChange(newSearchTerm);
+  };
 
   return (
     <div className="Header">
@@ -26,6 +35,25 @@ const Header = () => {
 
       <Link to="/mina-annonser/lagg-in-annons" className="LagInAnnons">Lägg in annons</Link>
 
+      {/* Search Bar */}
+      <div className="Search">
+        {searchOpen && (
+          <input
+            type="text"
+            placeholder="Sök produktnamn..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+            className="search-input"
+          />
+        )}
+        <FontAwesomeIcon
+          icon={faSearch}
+          size="lg"
+          className="search-icon"
+          onClick={toggleSearch}
+        />
+      </div>
+
       <span onClick={openModal} className="LogSignIn">
         <FontAwesomeIcon icon={faUser} size="lg" />
       </span>
@@ -38,9 +66,8 @@ const Header = () => {
 
       <div className={`MobileMenu ${isMenuOpen ? 'open' : ''}`}>
         <Link to="/" onClick={toggleMenu}>Home</Link>
-        <Link to="/kategorier" onClick={toggleMenu}>Kategorier</Link> {/* Add Kategorier link here */}
+        <Link to="/kategorier" onClick={toggleMenu}>Kategorier</Link>
         <Link to="/mina-annonser/lagg-in-annons" onClick={toggleMenu}>Lägg in annons</Link>
-        {/* Add more links as needed */}
       </div>
     </div>
   );

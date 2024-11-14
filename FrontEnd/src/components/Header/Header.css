@@ -1,58 +1,91 @@
-/* Header.scss */
 .Header {
-  display: grid;
-  grid-template-columns: repeat(12, 0.8fr);
-  grid-template-rows: 1fr;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-  background-color: #350E0E;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 0.5rem;
+  background-color: #350E0E;
+  position: relative;
 }
 
-.LogaNamn, .Kategorier, .LagInAnnons, .Search, .LogSignIn {
-  padding: 0.1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-size: 1vw;
-  color: #ffffff; /* Text color for buttons */
+.LogaNamn img {
+  max-width: 100px; /* Adjust logo size */
+}
+
+.Kategorier, .LagInAnnons, .Search, .LogSignIn {
+  margin: 0 10px;
+  color: #ffffff;
   font-weight: bold;
 }
 
-.LogaNamn {
-  grid-area: 1/2/2/4;
-  background-color: #350E0E;
-}
-
-.Kategorier {
-  grid-area: 1/4/2/5;
-  background-color: #350E0E;
-}
-
-.LagInAnnons {
-  grid-area: 1/7/2/8;
-  background-color: #350E0E;
-}
-
 .Search {
-  grid-area: 1/8/2/10;
-  background-color: #350E0E;
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
-.LogSignIn {
-  grid-area: 1/11/2/12;
-  background-color: #350E0E;
-  padding: 0.5rem; /* Adjust padding for icon size */
+.search-input {
+  width: 0;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  opacity: 0;
+  background-color: #fff;
+  transition: width 0.3s ease, opacity 0.3s ease;
+  /* Make the input field take the available space */
+  flex: 1;
+}
+
+.search-icon {
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  color: #ffffff;
+  margin-left: 10px; /* Space between input and icon */
 }
 
-.LogSignIn:hover {
-  background-color: #682525; /* Darker shade for hover effect */
+/* When the search bar is open */
+.Search input {
+  opacity: 1;
+  width: 200px; /* Adjust width as needed */
+  padding: 0.3rem;
 }
 
-.LogSignIn svg {
-  font-size: 1.5vw; /* Adjust icon size based on viewport width */
-  color: #ffffff; /* Darker color for the icon */
+.HamburgerMenu {
+  display: none;
+  cursor: pointer;
+}
+
+.MobileMenu {
+  display: none; /* Hide MobileMenu by default */
+}
+
+@media (max-width: 768px) {
+  /* Hide desktop links in mobile view */
+  .Kategorier, .LagInAnnons {
+    display: none;
+  }
+  .HamburgerMenu {
+    display: block;
+    font-size: 1.5rem;
+    color: #ffffff;
+  }
+  .MobileMenu.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #350E0E;
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0;
+  }
+  .MobileMenu a {
+    color: #ffffff;
+    padding: 0.5rem;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .MobileMenu a:hover {
+    background-color: #682525;
+  }
 }/*# sourceMappingURL=Header.css.map */
