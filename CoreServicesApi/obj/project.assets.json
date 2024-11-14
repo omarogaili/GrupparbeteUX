@@ -3217,11 +3217,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/omar/Desktop/Desktop-omar/UX/DarckShop/CoreServicesApi/CoreServicesApi.csproj",
+      "projectUniqueName": "/home/omar/Desktop/Desktop-omar/UX/Workg1/CoreServicesApi/CoreServicesApi.csproj",
       "projectName": "CoreServicesApi",
-      "projectPath": "/home/omar/Desktop/Desktop-omar/UX/DarckShop/CoreServicesApi/CoreServicesApi.csproj",
+      "projectPath": "/home/omar/Desktop/Desktop-omar/UX/Workg1/CoreServicesApi/CoreServicesApi.csproj",
       "packagesPath": "/home/omar/.nuget/packages/",
-      "outputPath": "/home/omar/Desktop/Desktop-omar/UX/DarckShop/CoreServicesApi/obj/",
+      "outputPath": "/home/omar/Desktop/Desktop-omar/UX/Workg1/CoreServicesApi/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/omar/.nuget/NuGet/NuGet.Config"
